@@ -2,6 +2,7 @@ import Products from './products.js';
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectCategory, reset } from '../store/categories-reducer.js';
+import { Typography } from '@material-ui/core';
 
 const mapDispatchToProps = { selectCategory, reset };
 
@@ -23,16 +24,19 @@ function Categories (props) {
 
     <div>
       <section id='categories'>
-        <h2>Product Categories</h2>
-        <button id='tools' onClick={reset}>Home</button>
+        <Typography variant='h5'>Browse Our Categories</Typography>
+        <Typography variant='h7' id='tools' onClick={reset}>Home</Typography>
         { (props.active === 'tools' || props.active === '') ? 
-        <button id='tools' onClick={()=>showCategory('tools')}>Tools</button> : ''
+        <div>
+        <Typography variant='h7' id='tools' onClick={()=>showCategory('tools')}>Tools</Typography> 
+        </div> : ''
         }
         { (props.active === 'materials' || props.active === '') ? 
-        <button id='materials' onClick={()=>showCategory('materials')}>Materials</button> : ''
+        <div>
+        <Typography variant='h7' id='materials' onClick={()=>showCategory('materials')}>Materials</Typography> </div> : ''
         }
         { (props.active === 'safetyGear' || props.active === '') ? 
-        <button id='safetyGear' onClick={()=>showCategory('safetyGear')}>Personal Protective Equipment</button>: ''
+        <Typography variant='h7' id='safetyGear' onClick={()=>showCategory('safetyGear')}>Personal Protective Equipment</Typography>: ''
         }
       </section>
       <section id="products">
