@@ -24,7 +24,7 @@ const mapDispatchToProps = { selectCategory, reset };
 function Products (props) {
 
   
-    console.log('PROPS on Products Page: ', 'Active Category: ',props.activeCategory, 'Products: ', props.products);
+  console.log('PROPS on Products Page: ', 'Active Category: ',props.activeCategory, 'Products: ', props.products);
  
 
   const classes = useStyles();
@@ -32,21 +32,28 @@ function Products (props) {
   return (
 
     <div id="productDetail">
-      <section>
+      {props.products.map((product, idx) => (
+        (product.category !== props.activeCategory)? '' : 
+      <section key={idx}>
         <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-           
-            title="Contemplative Reptile"
+            image={product.image}
+            title={product.name}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Lizard
+              {product.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica
+              {product.description}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Only ${product.price}!
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {product.inStock} Currently in stock!
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -60,6 +67,7 @@ function Products (props) {
         </CardActions>
         </Card>
       </section>
+      ))}
     </div>
   )
 }
@@ -72,4 +80,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
- // image="/static/images/cards/contemplative-reptile.jpg"
+ // image="/static/images/cards/contemplative-reptile.jpg" --> goes between class name and title
