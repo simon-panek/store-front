@@ -1,16 +1,19 @@
-import React from 'react';
 import Products from './products.js';
+import React from 'react';
+import { connect } from 'react-redux';
+import { selectCategory, reset } from '../store/categories-reducer.js';
+
+const mapDispatchToProps = { selectCategory, reset };
 
 function Categories (props) {
 
-
-
-  const showTools = () => {
-    console.log('show tools');
+  const showCategory = (category) => {
+    console.log('show category: ', category);
+    props.selectCategory(category)
   }
-  
-  const showMaterials = () => {
-    console.log('show materials');
+
+  const reset = () => {
+    props.reset();
   }
 
 
@@ -19,8 +22,10 @@ function Categories (props) {
     <div>
       <section id='categories'>
         <h2>Product Categories</h2>
-        <button id='tools' onClick={showTools}>Tools</button>
-        <button id='materials' onClick={showMaterials}>Materials</button>
+        <button id='tools' onClick={reset}>Home</button>
+        <button id='tools' onClick={()=>showCategory('tools')}>Tools</button>
+        <button id='materials' onClick={()=>showCategory('materials')}>Materials</button>
+        <button id='safetyGear' onClick={()=>showCategory('safetyGear')}>Personal Protective Equipment</button>
       </section>
       <section id="products">
         <Products />
@@ -29,4 +34,9 @@ function Categories (props) {
   )
 }
 
-export default Categories;
+const mapStateToProps = state => ({
+  category: state.categories, 
+  active: state.active
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
