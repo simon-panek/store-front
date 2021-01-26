@@ -16,6 +16,8 @@ function Categories (props) {
     props.reset();
   }
 
+  console.log('CATEGORIES Active: ', props.active, 'Categories: ', props.categories);
+
 
   return (
 
@@ -23,9 +25,15 @@ function Categories (props) {
       <section id='categories'>
         <h2>Product Categories</h2>
         <button id='tools' onClick={reset}>Home</button>
-        <button id='tools' onClick={()=>showCategory('tools')}>Tools</button>
-        <button id='materials' onClick={()=>showCategory('materials')}>Materials</button>
-        <button id='safetyGear' onClick={()=>showCategory('safetyGear')}>Personal Protective Equipment</button>
+        { (props.active === 'tools' || props.active === '') ? 
+        <button id='tools' onClick={()=>showCategory('tools')}>Tools</button> : ''
+        }
+        { (props.active === 'materials' || props.active === '') ? 
+        <button id='materials' onClick={()=>showCategory('materials')}>Materials</button> : ''
+        }
+        { (props.active === 'safetyGear' || props.active === '') ? 
+        <button id='safetyGear' onClick={()=>showCategory('safetyGear')}>Personal Protective Equipment</button>: ''
+        }
       </section>
       <section id="products">
         <Products />
@@ -35,8 +43,8 @@ function Categories (props) {
 }
 
 const mapStateToProps = state => ({
-  category: state.categories, 
-  active: state.active
+  categories: state.categories.categories, 
+  active: state.categories.activeCategory
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
