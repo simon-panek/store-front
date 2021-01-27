@@ -11,6 +11,7 @@ function SimpleCart (props) {
 
   const removeItem = (product) => {
     console.log('SIMPLE CART removeItem product: ', product);
+    props.removeItem(product);
   }
   
   return (
