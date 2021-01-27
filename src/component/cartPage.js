@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,8 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import { selectCategory, reset, decrementStock } from '../store/categories-reducer.js';
-import {addItem, clearCart} from '../store/cart-reducer.js';
+import { removeItem, clearCart, addItem } from '../store/cart-reducer.js';
+import {incrementStock, decrementStock} from '../store/categories-reducer.js'
 
 const useStyles = makeStyles({
   root: {
@@ -20,15 +20,20 @@ const useStyles = makeStyles({
   },
 });
 
-const mapDispatchToProps = { selectCategory, reset, decrementStock, addItem, clearCart };
+const mapDispatchToProps = { removeItem, clearCart, incrementStock, addItem, decrementStock };
 
-function Products (props) {
-
-  
-  console.log('PROPS on Products Page: ', 'Active Category: ',props.activeCategory, 'Products: ', props.products);
- 
+function CartPage (props) {
 
   const classes = useStyles();
+
+  console.log('SIMPLE CART props.state ', props.state);
+  console.log('SIMPLE CART props.products ', props.products);
+
+  const removeFromCart = (product) => {
+    console.log('CART PAGE removeFromCart product: ', product);
+    props.removeItem(product);
+    props.incrementStock(product);
+  }
 
   const addToCart = (product) => {
     console.log('Adding to cart: ', product);
@@ -36,11 +41,14 @@ function Products (props) {
     props.addItem(product);
   }
 
+  console.log('Products ', props.products);
+  
   return (
-
+    <section>
+      Proof of life
+    
     <div id="productDetail">
-      {props.products.map((product, idx) => (
-        (product.category !== props.activeCategory)? '' : 
+      { props.products.map((product, idx) => (
       <section key={idx}>
         <Card className={classes.root}>
         <CardActionArea>
@@ -66,24 +74,36 @@ function Products (props) {
         </CardActionArea>
         <CardActions>
           <Button id={idx+'button'} size="small" color="primary"  onClick={()=>addToCart(product)}>
-            Add to Cart
+            +
           </Button>
-          <Button size="small" color="primary">
-            Impulse Buy!
+          <Button id={idx+'button2'} size="small" color="primary" onClick={()=>removeFromCart(product)}>
+            -
           </Button>
         </CardActions>
         </Card>
       </section>
       ))}
     </div>
+    </section>
   )
 }
 
 const mapStateToProps = state => ({
   state,
-  activeCategory: state.categories.activeCategory,
-  products: state.categories.products
+  products: state.cart.cart,
+  count: state.cartCount,
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
 
+   // <section id='simpleCart'>
+    //   <div>
+    //   { props.products.map((product, idx) => (
+    //     <section key={idx}>
+    //     <p>{product.name}</p>
+    //     <button id={idx+'button'} onClick={()=>removeItem(product)}>X</button>
+    //     </section>
+    //   ))}
+    //   </div>
+    // </section>
+    // <div id="productDetail">

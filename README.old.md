@@ -35,3 +35,4 @@
 #### UML
 
 ![UML Phase 1](401-storefront-lab-36-uml.png)
+![UML Phase 1](401-storefront-lab-37-uml.png)
