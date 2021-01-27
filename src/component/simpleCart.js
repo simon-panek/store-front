@@ -7,17 +7,29 @@ const mapDispatchToProps = { removeItem, clearCart };
 function SimpleCart (props) {
 
   console.log('SIMPLE CART props.state ', props.state);
+  console.log('SIMPLE CART props.products ', props.products);
+
+  const removeItem = (product) => {
+    console.log('SIMPLE CART removeItem product: ', product);
+  }
   
   return (
     <section id='simpleCart'>
-      <p>Proof of SimpleCart's Life</p>
+      <div>
+      { props.products.map((product, idx) => (
+        <section key={idx}>
+        <p>{product.name}</p>
+        <button id={idx+'button'} onClick={()=>removeItem(product)}>X</button>
+        </section>
+      ))}
+      </div>
     </section>
   )
 }
 
 const mapStateToProps = state => ({
   state,
-  products: state.cart,
+  products: state.cart.cart,
   count: state.cartCount,
 })
 
