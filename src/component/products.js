@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { selectCategory, reset } from '../store/categories-reducer.js';
+import {addItem, clearCart} from '../store/cart-reducer.js';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const mapDispatchToProps = { selectCategory, reset };
+const mapDispatchToProps = { selectCategory, reset, addItem, clearCart };
 
 function Products (props) {
 
@@ -28,6 +29,11 @@ function Products (props) {
  
 
   const classes = useStyles();
+
+  const addToCart = (product) => {
+    console.log('Adding to cart: ', product);
+    props.addItem(product);
+  }
 
   return (
 
@@ -58,7 +64,7 @@ function Products (props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button id={idx+'button'} size="small" color="primary"  onClick={()=>addToCart(product)}>
             Add to Cart
           </Button>
           <Button size="small" color="primary">

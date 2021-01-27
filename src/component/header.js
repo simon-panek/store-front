@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header(props) {
 
   const classes = useStyles();
 
+  // console.log('HEADER - state ', props.state);
+  
   return (
     <div id='header'>
       <AppBar position="static" color='gray'>
@@ -33,11 +36,16 @@ function Header() {
           <Typography variant="h6" className={classes.title}>
             Binary Brick and Mortar
           </Typography>
-          <Button color="inherit">Cart</Button>
+          <Button color="inherit">Cart ({props.cartCount})</Button>
         </Toolbar>
       </AppBar>
     </div>
   )
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  state,
+  cartCount: state.cart.cartCount
+})
+
+export default connect(mapStateToProps)(Header);

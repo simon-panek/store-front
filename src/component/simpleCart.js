@@ -5,6 +5,8 @@ import { removeItem, clearCart } from '../store/cart-reducer';
 const mapDispatchToProps = { removeItem, clearCart };
 
 function SimpleCart (props) {
+
+  console.log('SIMPLE CART props.state ', props.state);
   
   return (
     <section id='simpleCart'>

@@ -4,6 +4,7 @@ let initialState = {
 }
 
 export const addItem = (product) => {
+  console.log('CART REDUCER in addItem ', product);
   return {
     type: 'ADDITEM',
     payload: product
@@ -28,7 +29,7 @@ const cartSwitchBoard = (state=initialState, action) => {
   switch (type) {
     case 'ADDITEM':
       console.log('ADDING ITEM TO CART in CART REDUCER SWITCHBOARD');
-      return {...state, payload};
+      return {...state, cart: [...state.cart, payload], cartCount: state.cartCount + 1};
       
       case 'REMOVE':
         console.log('REMOVING ITEM TO CART in CART REDUCER SWITCHBOARD');
