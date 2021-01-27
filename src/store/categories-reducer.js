@@ -27,11 +27,26 @@ export const selectCategory = (category) => {
   }
 }
 
+export const incrementStock = (product) => {
+  return {
+    type: 'INCREMENTSTOCK',
+    payload: product
+  }
+}
+
+export const decrementStock = (product) => {
+  return {
+    type: 'DECREMENTSTOCK',
+    payload: product
+  }
+}
+
 export const reset = () => {
   return {
     type: 'RESET'
   }
 }
+
 
 const categoryReducer = (state=initialState, action) => {
   let { type, payload } = action;
@@ -41,6 +56,23 @@ const categoryReducer = (state=initialState, action) => {
       console.log('CATEGORY REDUCER initial state ', initialState);
       
       return {...state, activeCategory: payload};
+
+      case 'INCREMENTSTOCK':
+        //TODO: increment stock
+        return state; //need to update
+
+      case 'DECREMENTSTOCK':
+        //TODO: decrement stock
+        // state.products.map(product=> {
+        //   // let currentStock;
+        //   if(payload.name === product.name){
+        //     let newStock = product.inStock + 1;
+        //     return {...state, product.inStock: }; 
+        //   }
+        //   return currentStock;
+        // })
+        // let newStock = currentStock ++;
+        return state ; //need to update
       
       case 'RESET':
         return initialState;
