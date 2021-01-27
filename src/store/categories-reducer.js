@@ -1,3 +1,5 @@
+import { ContactSupportOutlined } from "@material-ui/icons";
+
 let initialState = {
   categories: [
     { name: 'tools', displayName: 'Tools' },
@@ -35,6 +37,7 @@ export const incrementStock = (product) => {
 }
 
 export const decrementStock = (product) => {
+  console.log('CATEGORY REDUCER decrementStock ', product);
   return {
     type: 'DECREMENTSTOCK',
     payload: product
@@ -53,7 +56,7 @@ const categoryReducer = (state=initialState, action) => {
   switch (type) {
     case 'SELECTCATEGORY':
     
-      console.log('CATEGORY REDUCER initial state ', initialState);
+      // console.log('CATEGORY REDUCER initial state ', initialState);
       
       return {...state, activeCategory: payload};
 
@@ -62,17 +65,25 @@ const categoryReducer = (state=initialState, action) => {
         return state; //need to update
 
       case 'DECREMENTSTOCK':
+        console.log('CATEGORY REDUCER Switch decrementStock ', payload)
         //TODO: decrement stock
-        // state.products.map(product=> {
-        //   // let currentStock;
-        //   if(payload.name === product.name){
-        //     let newStock = product.inStock + 1;
-        //     return {...state, product.inStock: }; 
-        //   }
-        //   return currentStock;
-        // })
-        // let newStock = currentStock ++;
-        return state ; //need to update
+        let tempArray = state.products;
+        let location;
+        tempArray.map((product, idx) => {
+          if(product.name === payload.name){
+            location = idx;
+          }
+          return location;
+        })
+
+        console.log({location});
+        console.log('tempArray before update: ', tempArray);
+        
+        tempArray[location].inStock = tempArray[location].inStock - 1;
+
+        console.log('tempArray after update: ', tempArray);
+
+        return {...state, products: tempArray}; //need to update
       
       case 'RESET':
         return initialState;

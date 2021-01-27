@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import { selectCategory, reset } from '../store/categories-reducer.js';
+import { selectCategory, reset, decrementStock } from '../store/categories-reducer.js';
 import {addItem, clearCart} from '../store/cart-reducer.js';
 
 const useStyles = makeStyles({
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const mapDispatchToProps = { selectCategory, reset, addItem, clearCart };
+const mapDispatchToProps = { selectCategory, reset, decrementStock, addItem, clearCart };
 
 function Products (props) {
 
@@ -32,6 +32,7 @@ function Products (props) {
 
   const addToCart = (product) => {
     console.log('Adding to cart: ', product);
+    props.decrementStock(product);
     props.addItem(product);
   }
 
@@ -86,4 +87,3 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
- // image="/static/images/cards/contemplative-reptile.jpg" --> goes between class name and title
