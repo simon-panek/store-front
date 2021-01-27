@@ -45,8 +45,6 @@ function CartPage (props) {
   
   return (
     <section>
-      Proof of life
-    
     <div id="productDetail">
       { props.products.map((product, idx) => (
       <section key={idx}>

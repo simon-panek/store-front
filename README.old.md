@@ -26,6 +26,18 @@
 
 ### Setup
 
+#### API
+
+- Base Route
+  - GET:
+  - GET ONE:
+  - POST:
+  - PUT:
+  - DELETE:
+
+
+#### DataBase Schema
+
 #### `.env` requirements (where applicable)
 
 #### How to initialize/run your application (where applicable)
@@ -35,4 +47,5 @@
 #### UML
 
 ![UML Phase 1](401-storefront-lab-36-uml.png)
-![UML Phase 1](401-storefront-lab-37-uml.png)
+![UML Phase 2](401-storefront-lab-37-uml.png)
+![UML Phase 3](401-storefront-lab-38-uml.png)

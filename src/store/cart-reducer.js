@@ -30,6 +30,9 @@ const cartSwitchBoard = (state=initialState, action) => {
   switch (type) {
     case 'ADDITEM':
       // console.log('ADDING ITEM TO CART in CART REDUCER SWITCHBOARD');
+
+      payload = {...payload, quantityInCart: payload.quantityInCart + 1};
+
       return {...state, cart: [...state.cart, payload], cartCount: state.cartCount + 1};
       
       case 'REMOVE':
