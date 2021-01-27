@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import { removeItem, clearCart } from '../store/cart-reducer';
+import { removeItem, clearCart } from '../store/cart-reducer.js';
+import {incrementStock} from '../store/categories-reducer.js'
 
-const mapDispatchToProps = { removeItem, clearCart };
+const mapDispatchToProps = { removeItem, clearCart, incrementStock };
 
 function SimpleCart (props) {
 
@@ -12,6 +13,7 @@ function SimpleCart (props) {
   const removeItem = (product) => {
     console.log('SIMPLE CART removeItem product: ', product);
     props.removeItem(product);
+    props.incrementStock(product);
   }
   
   return (
