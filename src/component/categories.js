@@ -1,5 +1,5 @@
 import Products from './products.js';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { selectCategory, reset } from '../store/categories-reducer.js';
 import { Typography } from '@material-ui/core';
@@ -18,6 +18,10 @@ function Categories (props) {
   }
 
   console.log('CATEGORIES Active: ', props.active, 'Categories: ', props.categories);
+
+  useEffect (()=> {
+    console.log('CATEGORIES useEffect: props.state.categories.products ', props.state);
+  })
 
 
   return (

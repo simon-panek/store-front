@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getApi } from '../store/api-reducer.js';
+import { updateProducts } from '../store/categories-reducer.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +28,16 @@ function Header(props) {
   const classes = useStyles();
 
   // console.log('HEADER - state ', props.state);
+
+  useEffect (() => {
+    props.getApi();
+    console.log('HEADER useEffect: props.state', props.state);
+  },[])
+
+  useEffect (() => {
+    console.log('HEADER useEffect: props.apiProducts', props.apiProducts);
+    props.updateProducts(props.apiProducts);
+  },[props.apiProducts])
   
   return (
     <div id='header'>
@@ -48,9 +60,12 @@ function Header(props) {
   )
 }
 
+const mapDispatchToProps = { getApi, updateProducts };
 const mapStateToProps = state => ({
   state,
-  cartCount: state.cart.cartCount
+  cartCount: state.cart.cartCount,
+  apiProducts: state.api.results,
+  // products: state.categories.products
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

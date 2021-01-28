@@ -23,22 +23,41 @@
 ### Links and Resources
 
 - [GitHub Pages](https://simon-panek.github.io/store-front/)
+- [Back End Deployment on Heroku](https://simonpanek-auth-api.herokuapp.com/)
 
 ### Setup
 
 #### API
 
-- Base Route
-  - GET:
-  - GET ONE:
-  - POST:
-  - PUT:
-  - DELETE:
+- Base Route `https://simonpanek-auth-api.herokuapp.com/api/v1`
+  - GET: `/store`
+  - GET ONE: `/store/id`
+  - POST: `/store`
+  - PUT: `/store/id`
+  - DELETE: `/store/id`
 
+- For PUT or POST must send in BODY that matches schema below
 
 #### DataBase Schema
 
+```JS
+
+const todoSchema = mongoose.Schema({
+  name: { type: String, required: true },
+  category: { type: String },
+  price: { type: Number },
+  inStock: { type: Number },
+  description: { type: String },
+  image: { type: String },
+  quantityInCart: { type: Number },
+});
+
+```
+
 #### `.env` requirements (where applicable)
+
+- REACT_APP_API=https://simonpanek-auth-api.herokuapp.com/api/v1
+- REACT_APP_SECRET=goldfish
 
 #### How to initialize/run your application (where applicable)
 

@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { removeItem, clearCart, addItem } from '../store/cart-reducer.js';
-import {incrementStock, decrementStock} from '../store/categories-reducer.js'
+import { incrementStock, decrementStock } from '../store/categories-reducer.js'
+import { putApi } from '../store/api-reducer.js';
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const mapDispatchToProps = { removeItem, clearCart, incrementStock, addItem, decrementStock };
+const mapDispatchToProps = { removeItem, clearCart, incrementStock, addItem, decrementStock, putApi };
 
 function CartPage (props) {
 
@@ -29,16 +30,18 @@ function CartPage (props) {
   console.log('SIMPLE CART props.state ', props.state);
   console.log('SIMPLE CART props.products ', props.products);
 
-  const removeFromCart = (product) => {
+  const removeFromCart = async (product) => {
     console.log('CART PAGE removeFromCart product: ', product);
     props.removeItem(product);
     props.incrementStock(product);
+    await props.putApi(product, 'incrementStock');
   }
 
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
     console.log('Adding to cart: ', product);
     props.decrementStock(product);
     props.addItem(product);
+    await props.putApi(product, 'decrementStock');
   }
 
   console.log('Products ', props.products);

@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeItem, clearCart } from '../store/cart-reducer.js';
 import {incrementStock} from '../store/categories-reducer.js'
+import { putApi } from '../store/api-reducer.js';
+
 import './simpleCart.scss';
 
-const mapDispatchToProps = { removeItem, clearCart, incrementStock };
+const mapDispatchToProps = { removeItem, clearCart, incrementStock, putApi };
 
 function SimpleCart (props) {
 
@@ -15,6 +17,7 @@ function SimpleCart (props) {
     // console.log('SIMPLE CART removeItem product: ', product);
     props.removeItem(product);
     props.incrementStock(product);
+    props.putApi(product, 'incrementStock');
   }
   
   return (

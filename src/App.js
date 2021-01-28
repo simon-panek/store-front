@@ -3,7 +3,7 @@ import Footer from './component/footer.js';
 import Categories from './component/categories.js';
 import SimpleCart from './component/simpleCart.js';
 import CartPage from './component/cartPage.js';
-import  { BrowserRouter, Route, Switch } from 'react-router-dom';
+import  { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
   return (
