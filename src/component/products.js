@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { selectCategory, reset, decrementStock } from '../store/categories-reducer.js';
-import {addItem, clearCart} from '../store/cart-reducer.js';
+import { addItem, clearCart } from '../store/cart-reducer.js';
+import { putApi, getApi } from '../store/api-reducer.js';
 
 const useStyles = makeStyles({
   root: {
@@ -20,20 +21,25 @@ const useStyles = makeStyles({
   },
 });
 
-const mapDispatchToProps = { selectCategory, reset, decrementStock, addItem, clearCart };
+const mapDispatchToProps = { selectCategory, reset, decrementStock, addItem, clearCart, putApi, getApi };
 
 function Products (props) {
 
   
-  console.log('PROPS on Products Page: ', 'Active Category: ',props.activeCategory, 'Products: ', props.products);
+  console.log('PROPS on Products Page: ', 'props.state ', props.state, 'Active Category: ',props.activeCategory, 'Products: ', props.products);
  
 
   const classes = useStyles();
 
-  const addToCart = (product) => {
-    console.log('Adding to cart: ', product);
+  const addToCart = async (product) => {
+    console.log('Adding to cart:A ', product);
+    // setTimeout(() => {
+    //   console.log('Adding to cart:B ', product);
+    // }, 2000);
     props.decrementStock(product);
     props.addItem(product);
+    await props.putApi(product, 'decrementStock');
+    // await props.getApi();
   }
 
   return (
@@ -82,7 +88,8 @@ function Products (props) {
 const mapStateToProps = state => ({
   state,
   activeCategory: state.categories.activeCategory,
-  products: state.categories.products
+  products: state.categories.products,
+  // apiProducts: state.api.results
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
