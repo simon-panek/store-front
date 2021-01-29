@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# LAB - Class 36
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project: Store Front
 
-## Available Scripts
+### Author: Simon Panek
 
-In the project directory, you can run:
+#### Collaborators:  Ricardo, Nathan, Garrett, Dina
 
-### `npm start`
+#### Image Credits
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Sledge Hammer: `https://images-na.ssl-images-amazon.com/images/I/61iqnRsLgdL._AC_SL1352_.jpg`
+- Chop Saw: `https://cdn.makitatools.com/apps/cms/img/ls1/1242566b-9bad-41d4-be5d-45d5dd71e6ae_ls1019l_p_1500px.png`
+- Tape Measure: `https://www.zoro.com/static/cms/product/prev/Z-s-rxkcpEx_.JPG`
+- Socket Set: `https://images-na.ssl-images-amazon.com/images/I/71mlcw5eqYL._AC_SL1000_.jpg`
+- Plywood: `https://images.homedepot-static.com/productImages/6b5c9722-fc3c-4b26-ad5e-dcae58c1ad68/svn/dimensions-project-panels-225487-64_145.jpg`
+- Cement: `https://mobileimages.lowes.com/product/converted/039645/039645110263.jpg?size=pdhi`
+- Screws: `https://mobileimages.lowes.com/product/converted/764666/764666692169.jpg?size=lg`
+- Hared Hat: `https://mobileimages.lowes.com/product/converted/078371/078371912956.jpg?size=pdhi`
+- Mask: `https://oshareview.com/wp-content/uploads/2020/05/N95-Mask-1-474x380.jpeg`
+- Gloves: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhGDTf5OOb4Xicqs122O5y5zWDpMcHBftlhtesGIZ6X7I-cZzM5uIZ2LBor0sz-bI1q2_CgEcv&usqp=CAc`
+- Harness: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDZPfXqn6l2NjMApudsTRh4puUgKMcMJDhLQZQ-9nFXzFGqPLbCwi29qK5CaxE-CSjuGdngUVp&usqp=CAc`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Links and Resources
 
-### `npm test`
+- [GitHub Pages](https://simon-panek.github.io/store-front/)
+- [Back End Deployment on Heroku](https://simonpanek-auth-api.herokuapp.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Setup
 
-### `npm run build`
+#### API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Base Route `https://simonpanek-auth-api.herokuapp.com/api/v1`
+  - GET: `/store`
+  - GET ONE: `/store/id`
+  - POST: `/store`
+  - PUT: `/store/id`
+  - DELETE: `/store/id`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- For PUT or POST must send in BODY that matches schema below
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### DataBase Schema
 
-### `npm run eject`
+```JS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const todoSchema = mongoose.Schema({
+  name: { type: String, required: true },
+  category: { type: String },
+  price: { type: Number },
+  inStock: { type: Number },
+  description: { type: String },
+  image: { type: String },
+  quantityInCart: { type: Number },
+});
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### `.env` requirements (where applicable)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- REACT_APP_API=https://simonpanek-auth-api.herokuapp.com/api/v1
+- REACT_APP_SECRET=goldfish
 
-## Learn More
+#### How to initialize/run your application (where applicable)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `npm start`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### UML
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![UML Phase 1](401-storefront-lab-36-uml.png)
+![UML Phase 2](401-storefront-lab-37-uml.png)
+![UML Phase 3](401-storefront-lab-38-uml.png)
